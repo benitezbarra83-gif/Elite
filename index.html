@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Elite | Tracker de Hábitos</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <header class="hero">
+        <h1>Elite</h1>
+        <p>
+          Construye disciplina diaria: hábitos para fuerza física, mental y
+          liderazgo personal.
+        </p>
+      </header>
+
+      <section class="card">
+        <h2>Nuevo hábito</h2>
+        <form id="habit-form" class="habit-form">
+          <label for="habit-name">Nombre del hábito</label>
+          <input
+            id="habit-name"
+            name="habitName"
+            placeholder="Ej: Entrenamiento 45 min"
+            maxlength="60"
+            required
+          />
+          <button type="submit">Agregar hábito</button>
+        </form>
+      </section>
+
+      <section class="card">
+        <div class="card-title">
+          <h2>Mis hábitos de hoy</h2>
+          <button id="reset-day" class="ghost">Reiniciar día</button>
+        </div>
+        <ul id="habit-list" class="habit-list"></ul>
+      </section>
+
+      <section class="stats-grid">
+        <article class="card stat">
+          <h3>Hábitos activos</h3>
+          <p id="total-habits">0</p>
+        </article>
+        <article class="card stat">
+          <h3>Completados hoy</h3>
+          <p id="completed-today">0</p>
+        </article>
+        <article class="card stat">
+          <h3>Progreso diario</h3>
+          <p id="daily-progress">0%</p>
+        </article>
+      </section>
+    </main>
+
+    <template id="habit-item-template">
+      <li class="habit-item">
+        <label class="habit-label">
+          <input type="checkbox" class="habit-check" />
+          <span class="habit-name"></span>
+        </label>
+        <div class="habit-meta">
+          <span class="streak"></span>
+          <button class="delete">Eliminar</button>
+        </div>
+      </li>
+    </template>
+
+    <script src="app.js" defer></script>
+  </body>
+</html>
