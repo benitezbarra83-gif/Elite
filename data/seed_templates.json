@@ -1,0 +1,53 @@
+{
+  "templates": [
+    {
+      "id": "reading",
+      "name": "Lectura",
+      "description": "Planifica libros, ritmo de lectura y proyección de finalización.",
+      "suggested_habits": ["Leer 20 páginas", "Leer 30 minutos"],
+      "fields": ["objetivo_libros_anual", "paginas_por_dia", "tiempo_diario_min"]
+    },
+    {
+      "id": "affirmations",
+      "name": "Afirmaciones",
+      "description": "Crea afirmaciones para fortalecer seguridad, confianza y carácter.",
+      "suggested_habits": ["Afirmaciones por la mañana", "Afirmaciones antes de dormir"],
+      "fields": ["objetivo_emocional", "afirmaciones", "repeticiones_por_dia"]
+    },
+    {
+      "id": "nutrition",
+      "name": "Alimentación",
+      "description": "Controla calorías y macros con recomendaciones según tu meta física.",
+      "suggested_habits": ["Registrar desayuno", "Cumplir proteína diaria"],
+      "fields": ["objetivo", "calorias_objetivo", "proteina_objetivo_g", "carbos_objetivo_g", "grasas_objetivo_g"]
+    },
+    {
+      "id": "workouts",
+      "name": "Ejercicios",
+      "description": "Sigue rutinas según objetivo: fuerza, músculo o pérdida de grasa.",
+      "suggested_habits": ["Entrenar 45 minutos", "Caminar 10000 pasos"],
+      "fields": ["objetivo", "dias_entrenamiento_semana", "nivel"]
+    },
+    {
+      "id": "projects",
+      "name": "Proyectos",
+      "description": "Libreta para escribir, dibujar y generar imágenes con IA para tus ideas.",
+      "suggested_habits": ["Escribir 1 idea", "Revisar proyecto 15 minutos"],
+      "fields": ["titulo", "descripcion", "notas", "prompt_imagen_ia"]
+    },
+    {
+      "id": "finance",
+      "name": "Finanzas",
+      "description": "Gestiona presupuesto mensual y gastos con tarjeta o efectivo.",
+      "suggested_habits": ["Registrar gasto del día", "Revisar presupuesto semanal"],
+      "fields": ["presupuesto_mensual", "gasto_tarjeta", "gasto_efectivo", "categoria"]
+    },
+    {
+      "id": "avatar",
+      "name": "Avatar y Plan de Vida",
+      "description": "Personaliza tu avatar y define principios, metas, plazos y peso.",
+      "suggested_habits": ["Revisar metas", "Registrar peso"],
+      "fields": ["avatar", "principios", "metas", "plazos", "peso_actual"]
+    }
+  ]
+}
