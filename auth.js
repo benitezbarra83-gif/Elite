@@ -1,47 +1,45 @@
-// auth.js
+// Authentication module for Elite app
 
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
+const firebase = require('firebase/app');
+require('firebase/auth');
 
-const auth = getAuth();
+// Register a new user
+function registerUser(email, password) {
+    return firebase.auth().createUserWithEmailAndPassword(email, password);
+}
 
-// Login function
-export const login = (email, password) => {
-    return signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            // Signed in
-            const user = userCredential.user;
-            return user;
-        })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            throw new Error(errorMessage);
-        });
-};
+// Login a user
+function loginUser(email, password) {
+    return firebase.auth().signInWithEmailAndPassword(email, password);
+}
 
-// Register function
-export const register = (email, password) => {
-    return createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            // Registered
-            const user = userCredential.user;
-            return user;
-        })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            throw new Error(errorMessage);
-        });
-};
+// Login with Google
+function loginWithGoogle() {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    return firebase.auth().signInWithPopup(provider);
+}
 
-// Logout function
-export const logout = () => {
-    return signOut(auth)
-        .then(() => {
-            // Sign-out successful.
-            console.log('User signed out.');
-        })
-        .catch((error) => {
-            console.error('Error signing out: ', error);
-        });
+// Logout the user
+function logoutUser() {
+    return firebase.auth().signOut();
+}
+
+// Get current user data
+function getCurrentUserData() {
+    return firebase.auth().currentUser;
+}
+
+// Update user data
+function updateUserData(updatedData) {
+    const user = getCurrentUserData();
+    return user.updateProfile(updatedData);
+}
+
+module.exports = {
+    registerUser,
+    loginUser,
+    loginWithGoogle,
+    logoutUser,
+    getCurrentUserData,
+    updateUserData
 };
