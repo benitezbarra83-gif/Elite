@@ -1,64 +1,57 @@
 // database.js
 
-// Firestore database functions for managing habits, users, evaluations, and readings
-
-const admin = require('firebase-admin');
+const { Firestore } = require('@google-cloud/firestore');
 
 // Initialize Firestore
-admin.initializeApp();
-const db = admin.firestore();
+const firestore = new Firestore();
 
-// Function to add a new user
-const addUser = async (userId, userData) => {
-    await db.collection('users').doc(userId).set(userData);
+// Functionality for managing habits
+const createHabit = async (userId, habitData) => {
+    const habitRef = firestore.collection('habits').doc();
+    await habitRef.set({ userId, ...habitData });
+    return habitRef.id;
 };
 
-// Function to get a user by ID
+const getHabits = async (userId) => {
+    const habitsSnapshot = await firestore.collection('habits').where('userId', '==', userId).get();
+    return habitsSnapshot.docs.map(doc => doc.data());
+};
+
+// Functionality for managing readings
+const createReading = async (readingData) => {
+    const readingRef = firestore.collection('readings').doc();
+    await readingRef.set(readingData);
+    return readingRef.id;
+};
+
+const getReadings = async () => {
+    const readingsSnapshot = await firestore.collection('readings').get();
+    return readingsSnapshot.docs.map(doc => doc.data());
+};
+
+// Functionality for evaluations
+const createEvaluation = async (evaluationData) => {
+    const evaluationRef = firestore.collection('evaluations').doc();
+    await evaluationRef.set(evaluationData);
+    return evaluationRef.id;
+};
+
+const getEvaluations = async () => {
+    const evaluationsSnapshot = await firestore.collection('evaluations').get();
+    return evaluationsSnapshot.docs.map(doc => doc.data());
+};
+
+// Functionality for user management
+const createUser = async (userData) => {
+    const userRef = firestore.collection('users').doc();
+    await userRef.set(userData);
+    return userRef.id;
+};
+
 const getUser = async (userId) => {
-    const userDoc = await db.collection('users').doc(userId).get();
-    return userDoc.exists ? userDoc.data() : null;
+    const userRef = firestore.collection('users').doc(userId);
+    const userSnapshot = await userRef.get();
+    return userSnapshot.exists ? userSnapshot.data() : null;
 };
 
-// Function to add a new habit
-const addHabit = async (habitId, habitData) => {
-    await db.collection('habits').doc(habitId).set(habitData);
-};
-
-// Function to get a habit by ID
-const getHabit = async (habitId) => {
-    const habitDoc = await db.collection('habits').doc(habitId).get();
-    return habitDoc.exists ? habitDoc.data() : null;
-};
-
-// Function to add an evaluation
-const addEvaluation = async (evaluationId, evaluationData) => {
-    await db.collection('evaluations').doc(evaluationId).set(evaluationData);
-};
-
-// Function to get an evaluation by ID
-const getEvaluation = async (evaluationId) => {
-    const evaluationDoc = await db.collection('evaluations').doc(evaluationId).get();
-    return evaluationDoc.exists ? evaluationDoc.data() : null;
-};
-
-// Function to add a reading
-const addReading = async (readingId, readingData) => {
-    await db.collection('readings').doc(readingId).set(readingData);
-};
-
-// Function to get a reading by ID
-const getReading = async (readingId) => {
-    const readingDoc = await db.collection('readings').doc(readingId).get();
-    return readingDoc.exists ? readingDoc.data() : null;
-};
-
-module.exports = {
-    addUser,
-    getUser,
-    addHabit,
-    getHabit,
-    addEvaluation,
-    getEvaluation,
-    addReading,
-    getReading,
-};
+module.exports = { createHabit, getHabits, createReading, getReadings, createEvaluation, getEvaluations, createUser, getUser };
